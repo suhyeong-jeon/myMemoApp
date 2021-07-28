@@ -18,12 +18,13 @@ struct ComposeScene: View {
             VStack {
                 //text를 입력받음
                 TextField("", text: $content)
+                    .background(Color.yellow)
             }
             //화면 전체로 frame을 선언
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             //displayMode를 inline으로 지정하면 largeTitle이였던 타이틀이 변경됨
             .navigationBarTitle("New Memo :)", displayMode: .inline)
-            .navigationBarItems(leading: Dismissbutton(show: $showComposer), trailing: SaveButton(show: $showComposer))
+            .navigationBarItems(leading: Dismissbutton(show: $showComposer), trailing: SaveButton(show: $showComposer, content: $content))
         }
     }
 }
@@ -41,8 +42,14 @@ fileprivate struct Dismissbutton: View{
 
 fileprivate struct SaveButton: View{
     @Binding var show: Bool
+    @EnvironmentObject var store: MemoStore
+    @Binding var content: String
+    
     var body: some View{
         Button(action: {
+            //저장한 내용을 저장
+            self.store.insert(memo: self.content)
+            
             self.show = false
         }, label: {
             Text("Save")

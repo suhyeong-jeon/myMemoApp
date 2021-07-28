@@ -30,6 +30,8 @@ struct MemoListScene: View {
             //ComposeScene에서 binding으로 showComposer가 false가 되면 = cancel, save를 누르면 sheet가 내려감
             .sheet(isPresented: $showComposer, content: {
                 ComposeScene(showComposer: self.$showComposer)
+                    //environmentObject(self.store)를 등록하여 store 변수를 미리 메모리에 할당시킴
+                    .environmentObject(self.store)
             })
         }
     }
