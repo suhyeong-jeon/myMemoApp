@@ -16,18 +16,8 @@ struct MemoListScene: View {
     var body: some View {
         NavigationView {
             List(store.list) { memo in
-                VStack(alignment: .leading) {
-                    Text(memo.content)
-                        .font(.body)
-                        //lineLimit를 1로 하면 1줄이 넘어갈시 뒷부분을 생략함
-                        .lineLimit(1)
-                    
-                    Text("\(memo.insertDate, formatter: self.formatter)")
-                        //caption으로 날짜부분의 text 스타일을 바꿔줌
-                        .font(.caption)
-                        .foregroundColor(Color(UIColor.secondaryLabel))
-                    
-                }
+                //memo를 MemoCell로 전달
+                MemoCell(memo: memo)
             }
             .navigationBarTitle("My Memo :)")
         }
@@ -41,3 +31,4 @@ struct MemoListScene_Previews: PreviewProvider {
             .environmentObject(DateFormatter.memoDateFormatter)
     }
 }
+
