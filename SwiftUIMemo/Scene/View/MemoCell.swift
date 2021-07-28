@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 //body에 있던 뷰를 분리했음. shift+command+a -> Extract Subview -> 새로운 SwiftUI.swift에 저장
 struct MemoCell: View {
     //생성자로 전달받을 list의 memo를 저장할 변수. ObservedObject는 메모객체가 업데이트되는 시점마다 view가 새롭게 그려져 최신데이터를 표시함
