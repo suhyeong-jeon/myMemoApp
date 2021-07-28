@@ -19,6 +19,7 @@
 		CD8A05E426B1584A00D47183 /* DateFormatter+Memo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8A05E326B1584A00D47183 /* DateFormatter+Memo.swift */; };
 		CD8A05E726B15D0900D47183 /* MemoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8A05E626B15D0900D47183 /* MemoCell.swift */; };
 		CD8A05EA26B15E6C00D47183 /* ComposeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8A05E926B15E6C00D47183 /* ComposeScene.swift */; };
+		CDC4BA5126B183A400BEE161 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC4BA5026B183A400BEE161 /* TextView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		CD8A05E326B1584A00D47183 /* DateFormatter+Memo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Memo.swift"; sourceTree = "<group>"; };
 		CD8A05E626B15D0900D47183 /* MemoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoCell.swift; sourceTree = "<group>"; };
 		CD8A05E926B15E6C00D47183 /* ComposeScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeScene.swift; sourceTree = "<group>"; };
+		CDC4BA5026B183A400BEE161 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				CD8A05E626B15D0900D47183 /* MemoCell.swift */,
+				CDC4BA5026B183A400BEE161 /* TextView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -200,6 +203,7 @@
 				CD8A05CE26B14C5200D47183 /* SwiftUIMemo.xcdatamodeld in Sources */,
 				CD8A05E426B1584A00D47183 /* DateFormatter+Memo.swift in Sources */,
 				CD8A05C926B14C5200D47183 /* SceneDelegate.swift in Sources */,
+				CDC4BA5126B183A400BEE161 /* TextView.swift in Sources */,
 				CD8A05CB26B14C5200D47183 /* MemoListScene.swift in Sources */,
 				CD8A05DF26B14D5300D47183 /* Memo.swift in Sources */,
 				CD8A05E726B15D0900D47183 /* MemoCell.swift in Sources */,

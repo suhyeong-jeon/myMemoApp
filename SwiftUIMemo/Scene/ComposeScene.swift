@@ -13,11 +13,13 @@ struct ComposeScene: View {
     
     @Binding var showComposer: Bool
     
+    
     var body: some View {
         NavigationView {
             VStack {
                 //text를 입력받음
-                TextField("", text: $content)
+                TextView(text: $content)
+                    .frame(maxWidth: .infinity, maxHeight:  .infinity)
                     .background(Color.yellow)
             }
             //화면 전체로 frame을 선언
