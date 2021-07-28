@@ -32,6 +32,7 @@ struct MemoListScene: View {
                 ComposeScene(showComposer: self.$showComposer)
                     //environmentObject(self.store)를 등록하여 store 변수를 미리 메모리에 할당시킴
                     .environmentObject(self.store)
+                    .environmentObject(KeyboardObserver())
             })
         }
     }

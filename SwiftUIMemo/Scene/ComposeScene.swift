@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ComposeScene: View {
+    @EnvironmentObject var keyboard: KeyboardObserver
     @EnvironmentObject var store: MemoStore
     @State private var content: String = ""
     
@@ -20,7 +21,9 @@ struct ComposeScene: View {
                 //text를 입력받음
                 TextView(text: $content)
                     .frame(maxWidth: .infinity, maxHeight:  .infinity)
-                    .background(Color.yellow)
+//                    .padding(.bottom, keyboard.context.height)
+                    .animation(.easeInOut(duration: keyboard.context.animatioinDuration))
+//                    .background(Color.yellow)
             }
             //화면 전체로 frame을 선언
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -64,5 +67,6 @@ struct ComposeScene_Previews: PreviewProvider {
         //constant(false)를 전달
         ComposeScene(showComposer: .constant(false))
             .environmentObject(MemoStore())
+            .environmentObject(KeyboardObserver())
     }
 }

@@ -20,6 +20,7 @@
 		CD8A05E726B15D0900D47183 /* MemoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8A05E626B15D0900D47183 /* MemoCell.swift */; };
 		CD8A05EA26B15E6C00D47183 /* ComposeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8A05E926B15E6C00D47183 /* ComposeScene.swift */; };
 		CDC4BA5126B183A400BEE161 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC4BA5026B183A400BEE161 /* TextView.swift */; };
+		CDC4BA5426B18D2800BEE161 /* KeyboardObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC4BA5326B18D2800BEE161 /* KeyboardObserver.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		CD8A05E626B15D0900D47183 /* MemoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoCell.swift; sourceTree = "<group>"; };
 		CD8A05E926B15E6C00D47183 /* ComposeScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeScene.swift; sourceTree = "<group>"; };
 		CDC4BA5026B183A400BEE161 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
+		CDC4BA5326B18D2800BEE161 /* KeyboardObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardObserver.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 		CD8A05C526B14C5200D47183 /* SwiftUIMemo */ = {
 			isa = PBXGroup;
 			children = (
+				CDC4BA5226B18D1100BEE161 /* Shared */,
 				CD8A05E826B15E1E00D47183 /* Scene */,
 				CD8A05E226B1582A00D47183 /* Extension */,
 				CD8A05DD26B14D3200D47183 /* Model */,
@@ -126,6 +129,14 @@
 				CD8A05E926B15E6C00D47183 /* ComposeScene.swift */,
 			);
 			path = Scene;
+			sourceTree = "<group>";
+		};
+		CDC4BA5226B18D1100BEE161 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				CDC4BA5326B18D2800BEE161 /* KeyboardObserver.swift */,
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -200,6 +211,7 @@
 			files = (
 				CD8A05C726B14C5200D47183 /* AppDelegate.swift in Sources */,
 				CD8A05E126B14E3D00D47183 /* MemoStore.swift in Sources */,
+				CDC4BA5426B18D2800BEE161 /* KeyboardObserver.swift in Sources */,
 				CD8A05CE26B14C5200D47183 /* SwiftUIMemo.xcdatamodeld in Sources */,
 				CD8A05E426B1584A00D47183 /* DateFormatter+Memo.swift in Sources */,
 				CD8A05C926B14C5200D47183 /* SceneDelegate.swift in Sources */,
