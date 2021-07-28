@@ -13,6 +13,8 @@ struct MemoListScene: View {
     @EnvironmentObject var store: MemoStore
     @EnvironmentObject var formatter: DateFormatter
     
+    @State var showComposer: Bool = false
+    
     var body: some View {
         NavigationView {
             List(store.list) { memo in
@@ -20,7 +22,30 @@ struct MemoListScene: View {
                 MemoCell(memo: memo)
             }
             .navigationBarTitle("My Memo :)")
+            //🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+            //여기서 전달한 showComposer는 ModalButton의 show에 저장됨
+            //View 외부에 있는 속성을 바꾸고싶다면 binding속성으로 전달해야함
+            .navigationBarItems(trailing: ModalButton(show: $showComposer))
+            //sheet에서는 showComposer가 true면 ComposeScene()을 실행하고 return된 화면을 modal방식으로 실행함
+            //ComposeScene에서 binding으로 showComposer가 false가 되면 = cancel, save를 누르면 sheet가 내려감
+            .sheet(isPresented: $showComposer, content: {
+                ComposeScene(showComposer: self.$showComposer)
+            })
         }
+    }
+}
+
+fileprivate struct ModalButton: View{
+    @Binding var show: Bool
+    
+    
+    var body: some View{
+        Button(action:  {
+            //만약 여기서 show를 바꾸면 showComposer 속성도 바뀌게됨
+            self.show = true
+        }, label: {
+            Image(systemName: "plus")
+        })
     }
 }
 

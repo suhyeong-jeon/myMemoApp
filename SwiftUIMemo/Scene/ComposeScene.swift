@@ -11,6 +11,8 @@ struct ComposeScene: View {
     @EnvironmentObject var store: MemoStore
     @State private var content: String = ""
     
+    @Binding var showComposer: Bool
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -21,15 +23,16 @@ struct ComposeScene: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             //displayMode를 inline으로 지정하면 largeTitle이였던 타이틀이 변경됨
             .navigationBarTitle("New Memo :)", displayMode: .inline)
-            .navigationBarItems(leading: Dismissbutton(), trailing: SaveButton())
+            .navigationBarItems(leading: Dismissbutton(show: $showComposer), trailing: SaveButton(show: $showComposer))
         }
     }
 }
 //ComposeScene에서만 사용하는 Button을 만들기 위해 fileprivate으로 선언
 fileprivate struct Dismissbutton: View{
+    @Binding var show: Bool
     var body: some View{
         Button(action: {
-            
+            self.show = false
         }, label: {
             Text("Cancel")
         })
@@ -37,9 +40,10 @@ fileprivate struct Dismissbutton: View{
 }
 
 fileprivate struct SaveButton: View{
+    @Binding var show: Bool
     var body: some View{
         Button(action: {
-            
+            self.show = false
         }, label: {
             Text("Save")
         })
@@ -48,7 +52,8 @@ fileprivate struct SaveButton: View{
 
 struct ComposeScene_Previews: PreviewProvider {
     static var previews: some View {
-        ComposeScene()
+        //constant(false)를 전달
+        ComposeScene(showComposer: .constant(false))
             .environmentObject(MemoStore())
     }
 }
