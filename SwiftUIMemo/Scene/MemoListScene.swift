@@ -18,8 +18,12 @@ struct MemoListScene: View {
     var body: some View {
         NavigationView {
             List(store.list) { memo in
-                //memo를 MemoCell로 전달
-                MemoCell(memo: memo)
+                NavigationLink(
+                    destination: DetailScene(memo: memo),
+                    label: {
+                        //memo를 MemoCell로 전달
+                        MemoCell(memo: memo)
+                    })
             }
             .navigationBarTitle("My Memo :)")
             //🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
