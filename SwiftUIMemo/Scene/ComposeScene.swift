@@ -14,6 +14,8 @@ struct ComposeScene: View {
     
     @Binding var showComposer: Bool
     
+    var memo: Memo? = nil
+    
     
     var body: some View {
         NavigationView {
@@ -28,8 +30,12 @@ struct ComposeScene: View {
             //화면 전체로 frame을 선언
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             //displayMode를 inline으로 지정하면 largeTitle이였던 타이틀이 변경됨
-            .navigationBarTitle("New Memo :)", displayMode: .inline)
-            .navigationBarItems(leading: Dismissbutton(show: $showComposer), trailing: SaveButton(show: $showComposer, content: $content))
+            .navigationBarTitle(memo != nil ? "Edit Memo" : "New Memo :)", displayMode: .inline)
+            .navigationBarItems(leading: Dismissbutton(show: $showComposer), trailing: SaveButton(show: $showComposer, content: $content, memo: memo))
+        }
+        //화면이 표시되는 시점에 초기화 코드를 구현하고싶다면 onAppear에서 구현함
+        .onAppear {
+            self.content = self.memo?.content ?? ""
         }
     }
 }
@@ -50,10 +56,17 @@ fileprivate struct SaveButton: View{
     @EnvironmentObject var store: MemoStore
     @Binding var content: String
     
+    var memo: Memo? = nil
+    
     var body: some View{
         Button(action: {
-            //저장한 내용을 저장
-            self.store.insert(memo: self.content)
+            //memo가 전달되었다면
+            if let memo = self.memo {
+                self.store.update(memo: memo, content: self.content)
+            }else{
+                //저장한 내용을 저장
+                self.store.insert(memo: self.content)
+            }
             
             self.show = false
         }, label: {
