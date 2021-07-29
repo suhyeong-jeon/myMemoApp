@@ -19,10 +19,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
         // Get the managed object context from the shared persistent container.
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
-        let store = MemoStore()
-
+        
+        //CoreDataManager로 바꿔주므로써 CoreDataManager로 접근하게 해줌
+        let context = CoreDataManager.persistentContainer.viewContext
+        
+//        let store = MemoStore()
+//        coredata 생성 후 store 변경
+        let store = CoreDataManager.shared
+        
+        
         // Create the SwiftUI view and set the context as the value for the managedObjectContext environment keyPath.
         // Add `@Environment(\.managedObjectContext)` in the views that will need the context.
         let contentView = MemoListScene()
@@ -67,7 +73,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
 
         // Save changes in the application's managed object context when the application transitions to the background.
-        (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
+        
+        //여기도 CoreDataManager.shared로 수정
+        CoreDataManager.shared.saveContext()
     }
 
 

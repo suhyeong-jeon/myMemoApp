@@ -9,8 +9,8 @@ import SwiftUI
 
 struct DetailScene: View {
     //ObservedObject로 선언되면 Memo에 Published로 선언된 속성이 뷰를 자동으로 업데이트함.
-    @ObservedObject var memo: Memo
-    @EnvironmentObject var store: MemoStore
+    @ObservedObject var memo: MemoEntity
+    @EnvironmentObject var store: CoreDataManager
     
     @EnvironmentObject var formatter: DateFormatter
     
@@ -25,13 +25,13 @@ struct DetailScene: View {
             ScrollView {
                 VStack {
                     HStack {
-                        Text(self.memo.content)
+                        Text(self.memo.content ?? "")
                             .padding()
                         
                         Spacer()
                     }
                     
-                    Text("\(self.memo.insertDate, formatter: formatter)")
+                    Text("\(self.memo.insertDate ?? Date(), formatter: formatter)")
                         .font(.footnote)
                         .foregroundColor(Color(UIColor.secondaryLabel))
                 }
@@ -79,8 +79,8 @@ struct DetailScene: View {
 
 struct DetailScene_Previews: PreviewProvider {
     static var previews: some View {
-        DetailScene(memo: Memo(content: "Swift"))
+        DetailScene(memo: MemoEntity(context: CoreDataManager.mainContext))
             .environmentObject(DateFormatter.memoDateFormatter)
-            .environmentObject(MemoStore())
+                        .environmentObject(CoreDataManager.shared)
     }
 }

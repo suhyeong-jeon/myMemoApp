@@ -9,12 +9,12 @@ import SwiftUI
 
 struct ComposeScene: View {
     @EnvironmentObject var keyboard: KeyboardObserver
-    @EnvironmentObject var store: MemoStore
+    @EnvironmentObject var store: CoreDataManager
     @State private var content: String = ""
     
     @Binding var showComposer: Bool
     
-    var memo: Memo? = nil
+    var memo: MemoEntity? = nil
     
     
     var body: some View {
@@ -53,10 +53,10 @@ fileprivate struct Dismissbutton: View{
 
 fileprivate struct SaveButton: View{
     @Binding var show: Bool
-    @EnvironmentObject var store: MemoStore
+    @EnvironmentObject var store: CoreDataManager
     @Binding var content: String
     
-    var memo: Memo? = nil
+    var memo: MemoEntity? = nil
     
     var body: some View{
         Button(action: {
@@ -65,7 +65,7 @@ fileprivate struct SaveButton: View{
                 self.store.update(memo: memo, content: self.content)
             }else{
                 //저장한 내용을 저장
-                self.store.insert(memo: self.content)
+                self.store.addMemo(content: self.content)
             }
             
             self.show = false
@@ -79,7 +79,7 @@ struct ComposeScene_Previews: PreviewProvider {
     static var previews: some View {
         //constant(false)를 전달
         ComposeScene(showComposer: .constant(false))
-            .environmentObject(MemoStore())
+            .environmentObject(CoreDataManager.shared)
             .environmentObject(KeyboardObserver())
     }
 }

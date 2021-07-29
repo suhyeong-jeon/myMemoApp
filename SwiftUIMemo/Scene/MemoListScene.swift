@@ -10,15 +10,23 @@ import SwiftUI
 struct MemoListScene: View {
     //EnvironmentObject는 SceneDelegate에서 store를 선언해줬기 떄문
     //이렇게 되면 하나의 데이터를 여러 뷰에서 공유함
-    @EnvironmentObject var store: MemoStore
+    @EnvironmentObject var store: /*MemoStore*/ CoreDataManager
+    //모든 MemoStore은 CoreDataManager로 변경
+    //Memo는 MemoEntity로 변경
     @EnvironmentObject var formatter: DateFormatter
     
     @State var showComposer: Bool = false
     
+    //sortDescriptors에서는 날자를 기준으로 내림차순 정렬
+    //그리고 이 코드는 속성에 적용할 특성임
+    @FetchRequest(entity: MemoEntity.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \MemoEntity.insertDate, ascending: false)])
+    //목록을 저장할 속성 memoList
+    var memoList: FetchedResults<MemoEntity>
+    
     var body: some View {
         NavigationView {
             List {
-                ForEach(store.list) { memo in
+                ForEach(memoList) { memo in
                     NavigationLink(
                         destination: DetailScene(memo: memo),
                         label: {
@@ -27,7 +35,7 @@ struct MemoListScene: View {
                         })
                 }
                 //onDelete는 왼쪽으로 swap하면 삭제버튼이 나옴. perform에는 memoStore에서 구현한 함수를 주었음
-                .onDelete(perform: (store.delete))
+                .onDelete(perform: (delete))
             }
             .navigationBarTitle("My Memo :)")
             //🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
@@ -42,6 +50,12 @@ struct MemoListScene: View {
                     .environmentObject(self.store)
                     .environmentObject(KeyboardObserver())
             })
+        }
+    }
+    
+    func delete(set : IndexSet) {
+        for index in set {
+            store.delete(memo: memoList[index])
         }
     }
 }
@@ -63,7 +77,7 @@ fileprivate struct ModalButton: View{
 struct MemoListScene_Previews: PreviewProvider {
     static var previews: some View {
         MemoListScene()
-            .environmentObject(MemoStore())
+            .environmentObject(CoreDataManager.shared)
             .environmentObject(DateFormatter.memoDateFormatter)
     }
 }
