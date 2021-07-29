@@ -17,13 +17,17 @@ struct MemoListScene: View {
     
     var body: some View {
         NavigationView {
-            List(store.list) { memo in
-                NavigationLink(
-                    destination: DetailScene(memo: memo),
-                    label: {
-                        //memo를 MemoCell로 전달
-                        MemoCell(memo: memo)
-                    })
+            List {
+                ForEach(store.list) { memo in
+                    NavigationLink(
+                        destination: DetailScene(memo: memo),
+                        label: {
+                            //memo를 MemoCell로 전달
+                            MemoCell(memo: memo)
+                        })
+                }
+                //onDelete는 왼쪽으로 swap하면 삭제버튼이 나옴. perform에는 memoStore에서 구현한 함수를 주었음
+                .onDelete(perform: (store.delete))
             }
             .navigationBarTitle("My Memo :)")
             //🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥

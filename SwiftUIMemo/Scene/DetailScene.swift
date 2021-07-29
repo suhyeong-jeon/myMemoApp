@@ -15,6 +15,10 @@ struct DetailScene: View {
     @EnvironmentObject var formatter: DateFormatter
     
     @State private var showEditSheet = false
+    @State private var showDeleteAlert = false
+    
+    //presentationMode에 화면객체를 관리하는 모드가 저장됨
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         VStack {
@@ -35,6 +39,26 @@ struct DetailScene: View {
             
             HStack {
                 Button(action: {
+                    self.showDeleteAlert.toggle()
+                }, label: {
+                    Image(systemName: "trash")
+                        .foregroundColor(.red)
+                })
+                .padding()
+                .alert(isPresented: $showDeleteAlert, content: {
+                    Alert(title: Text("Delete Warning"), message: Text("Are you sure delete memo?"),
+                        
+                          primaryButton: .destructive(Text("Delete"),
+                                                      action: {self.store.delete(memo: self.memo)
+                                                        //NavigationLink에서 이전화면으로 돌아가기위한 코드
+                                                        self.presentationMode.wrappedValue.dismiss()
+                                                      }),
+                          secondaryButton: .cancel())
+                })
+                
+                Spacer()
+                
+                Button(action: {
                     self.showEditSheet.toggle()
                 }, label: {
                     Image(systemName: "square.and.pencil")
@@ -46,6 +70,8 @@ struct DetailScene: View {
                         .environmentObject(KeyboardObserver())
                 })
             }
+            .padding(.leading)
+            .padding(.trailing)
         }
         .navigationBarTitle("Look at my Memo")
     }
